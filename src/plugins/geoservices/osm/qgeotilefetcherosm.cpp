@@ -158,6 +158,7 @@ QGeoTiledMapReply *QGeoTileFetcherOsm::getTileImage(const QGeoTileSpec &spec)
     const QUrl url = m_providers[id]->tileAddress(spec.x(), spec.y(), spec.zoom());
     QNetworkRequest request;
     request.setHeader(QNetworkRequest::UserAgentHeader, m_userAgent);
+    request.setAttribute(QNetworkRequest::FollowRedirectsAttribute, true);
     request.setUrl(url);
     QNetworkReply *reply = m_nm->get(request);
     return new QGeoMapReplyOsm(reply, spec, m_providers[id]->format());

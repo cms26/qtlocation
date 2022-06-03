@@ -43,7 +43,7 @@
 
 #include <QNetworkAccessManager>
 #include <QNetworkRequest>
-
+#include <qdebug.h>
 #include <QtLocation/private/qgeotilespec_p.h>
 
 QT_BEGIN_NAMESPACE
@@ -58,6 +58,7 @@ QGeoTiledMapReply *GeoTileFetcherEsri::getTileImage(const QGeoTileSpec &spec)
 {
     QNetworkRequest request;
     request.setHeader(QNetworkRequest::UserAgentHeader, userAgent());
+    request.setAttribute(QNetworkRequest::FollowRedirectsAttribute, true);
 
     GeoTiledMappingManagerEngineEsri *engine = qobject_cast<GeoTiledMappingManagerEngineEsri *>(
           parent());
